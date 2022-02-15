@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Products Service Frontend Application</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>Products Service Frontend Application</h1>
+
+        <table border="1px solid black">
+            <tr>
+                <th style="padding:10px 50px 10px 50px">ID</th>
+                <th style="padding:1px 50px 10px 50px">Name</th>
+                <th style="padding:10px 50px 10px 50px">Quantity</th>
+            </tr>
+
+            <p th:each="entry : ${message}">
+                <tr>
+                    <td th:text="${entry.id}" style="padding:10px 50px 10px 50px"></td>
+                    <td th:text="${entry.name}" style="padding:10px 50px 10px 50px"></td>
+                    <td th:text="${entry.quantity}" style="padding:10px 50px 10px 50px"></td>
+                </tr>
+            </p>
+
+        </table>
+
+    </div>
+
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
