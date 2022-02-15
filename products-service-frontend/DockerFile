@@ -1,0 +1,5 @@
+FROM amazoncorretto:8u312-alpine3.15
+
+COPY ./target/products-service-frontend-0.0.1-SNAPSHOT.jar ./var/lib/products-service-frontend.jar
+
+ENTRYPOINT ["java", "-jar", "/var/lib/products-service-frontend.jar"]
