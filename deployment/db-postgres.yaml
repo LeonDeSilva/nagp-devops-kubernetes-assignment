@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-state
+  namespace: nagp-kns
+spec:
+  serviceName: postgres-state-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-state
+  template:
+    metadata:
+      labels:
+        app: postgres-state
+    spec:
+      containers:
+      - image: postgres:12
+        name: postgres-state
+        env:
+        - name: POSTGRES_DB
+          value: db0
+        - name: POSTGRES_USER
+          value: "root"
+        - name: POSTGRES_PASSWORD
+          value: "123"
+        ports:
+        - containerPort: 5432
+          name: postgres-state
+        volumeMounts:
+        - name: db-pv-storage-volume
+          mountPath: /data/postgres
+      volumes:
+      - name: db-pv-storage-volume
+        persistentVolumeClaim:
+          claimName: db-pv-storage-claim

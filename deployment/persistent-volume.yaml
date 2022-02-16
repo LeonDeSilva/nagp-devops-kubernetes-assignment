@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: db-pv-storage-volume
+  namespace: nagp-kns
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  local:
+    path: "/mnt/disks/ssd0"
+  claimRef:
+    namespace: nagp-kns
+    name: db-pv-storage-claim
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: "kubernetes.io/hostname"
+          operator: "In"
+          values:
+          - "gke-cluster-1-pool-1-244a475e-7rcd"
