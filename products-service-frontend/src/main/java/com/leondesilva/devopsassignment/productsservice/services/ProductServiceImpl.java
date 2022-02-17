@@ -23,10 +23,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Value("backend-service.host")
+    @Value("${backend-service.host}")
     private String backendServiceHost;
 
-    @Value("backend-service.port")
+    @Value("${backend-service.port}")
     private String backendServicePort;
 
     /**

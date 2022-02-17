@@ -9,4 +9,4 @@ spec:
  - targetPort: 9000
    port: 9000
  selector:
-  pod: products-service-backend-pod
+  app: products-service-backend

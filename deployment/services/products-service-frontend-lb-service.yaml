@@ -8,7 +8,7 @@ spec:
  ports:
  - targetPort: 9001
    port: 9001
-   nodePort: 9200
+   nodePort: 30000
  selector:
-  pod: products-service-frontend-pod
+  app: products-service-frontend
   
