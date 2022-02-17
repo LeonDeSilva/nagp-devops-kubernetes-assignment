@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: products-service-frontend-deployment
+ namespace: nagp-kns
+spec:
+ replicas: 3
+ selector:
+   matchLabels:
+    app: products-service-frontend
+ template:
+   metadata:
+    name: products-service-frontend-pod
+    labels:
+     app: products-service-frontend
+   spec:
+     containers:
+     - name: products-service-frontend
+       image: leondesilva/products-service-frontend:v1
+       env:
+        - name: BACKEND_SERVICE_HOST
+          value: product-service-clusterip-service
+        - name: BACKEND_SERVICE_PORT
+          value: "9000"

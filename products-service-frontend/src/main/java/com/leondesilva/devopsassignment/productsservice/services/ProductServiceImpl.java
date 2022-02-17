@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leondesilva.devopsassignment.productsservice.models.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +23,12 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Value("backend-service.host")
+    private String backendServiceHost;
+
+    @Value("backend-service.port")
+    private String backendServicePort;
+
     /**
      * Method to get all products.
      *
@@ -29,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public List<ProductModel> getProducts() {
-        JsonNode result = restTemplate.getForObject("http://localhost:9000/products", JsonNode.class);
+        JsonNode result = restTemplate.getForObject("http://" + backendServiceHost + ":" + backendServicePort + "/products", JsonNode.class);
         try {
             return objectMapper.readValue(result.toString(), List.class);
         } catch (JsonProcessingException e) {

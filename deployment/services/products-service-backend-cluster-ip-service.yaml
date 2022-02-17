@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: product-service-clusterip-service
+ namespace: nagp-kns
+spec:
+ type: ClusterIP
+ ports:
+ - targetPort: 9000
+   port: 9000
+ selector:
+  pod: products-service-backend-pod

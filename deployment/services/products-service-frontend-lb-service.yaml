@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: products-service-frontend-lb-service
+ namespace: nagp-kns
+spec:
+ type: LoadBalancer
+ ports:
+ - targetPort: 9001
+   port: 9001
+   nodePort: 9200
+ selector:
+  pod: products-service-frontend-pod
+  

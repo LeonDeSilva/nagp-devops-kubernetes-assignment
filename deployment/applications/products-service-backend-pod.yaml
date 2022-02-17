@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: products-service-backend-deployment
+ namespace: nagp-kns
+spec:
+ replicas: 4
+ selector:
+   matchLabels:
+    app: products-service-backend
+ template:
+   metadata:
+    name: products-service-backend-pod
+    labels:
+     app: products-service-backend
+   spec:
+     containers:
+     - name: products-service-backend
+       image: leondesilva/products-service-backend:v1
+       env:
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: dbName
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: dbUser
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: dbPassword
+        - name: DB_HOST
+          value: "postgres-state-svc"
+        - name: DB_PORT
+          value: "5432"

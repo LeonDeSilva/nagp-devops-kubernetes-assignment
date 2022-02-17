@@ -6,6 +6,8 @@ metadata:
 spec:
   serviceName: postgres-state-svc
   replicas: 1
+  updateStrategy:
+    type: OnDelete
   selector:
     matchLabels:
       app: postgres-state
@@ -19,11 +21,20 @@ spec:
         name: postgres-state
         env:
         - name: POSTGRES_DB
-          value: db0
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: dbName
         - name: POSTGRES_USER
-          value: "root"
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: dbUser
         - name: POSTGRES_PASSWORD
-          value: "123"
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: dbPassword
         ports:
         - containerPort: 5432
           name: postgres-state
