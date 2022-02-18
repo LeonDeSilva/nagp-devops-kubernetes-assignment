@@ -35,12 +35,14 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: dbPassword
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
         ports:
         - containerPort: 5432
           name: postgres-state
         volumeMounts:
         - name: db-pv-storage-volume
-          mountPath: /data/postgres
+          mountPath: /var/lib/postgresql/data
       volumes:
       - name: db-pv-storage-volume
         persistentVolumeClaim:
